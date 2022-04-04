@@ -1,0 +1,2 @@
+X;
+    displayBoard(&board); //bug

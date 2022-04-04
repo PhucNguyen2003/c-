@@ -1,0 +1,112 @@
+ex1:
+    you must omit the value for high as well
+
+ex2:
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <cstdlib>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+char getPlayerGuess(string used);
+bool inSecretWord(char guess, string THE_WORD);
+string updateSoFar(char guess, string THE_WORD, string soFar);
+
+int main()
+{
+    const int MAX_WRONG = 8; //max wrong guess
+
+    //create list of word
+    vector<string> words;
+    words.push_back("HANGMAN");
+    words.push_back("DIFFICULT");
+    words.push_back("GUESS");
+
+    //choose a word
+    srand(static_cast<unsigned int>(time(0)));
+    random_shuffle(words.begin(), words.end());
+    const string THE_WORD = words[0];
+    int wrong = 0;
+    string soFar(THE_WORD.size(), '-');
+    string used = "";
+
+    //greeting interfere
+    cout << "Welcome to hangman. Good luck.\n\n";
+    cout << "So far, your word is " << soFar << endl;
+    cout << "You have " << MAX_WRONG - wrong << " incorrect guess left\n";
+
+    while(soFar != THE_WORD && wrong < MAX_WRONG) //main loop
+    {
+        char guess = getPlayerGuess(used);
+        used = used + guess;
+        if(inSecretWord(guess, THE_WORD))
+        {
+            soFar = updateSoFar(guess, THE_WORD, soFar);
+        }
+        else
+        {
+            wrong++;
+        }
+
+        cout << "So far, your word is " << soFar << endl;
+        cout << "You have " << MAX_WRONG - wrong << " incorrect guess left" << endl;
+    }
+    if(wrong == MAX_WRONG)
+    {
+        cout << "You've been hanged.";
+    }
+    else
+    {
+        cout << "Congratulation!";
+    }
+
+    return 0;
+}
+
+char getPlayerGuess(string used)
+{
+    char guess;
+    do
+    {
+        cout << "Enter your guess: ";
+        cin >> guess;
+    } while (used.find(guess) != string::npos);
+
+    guess = toupper(guess);
+
+    return guess;
+}
+
+bool inSecretWord(char guess, string THE_WORD)
+{
+    if(THE_WORD.find(guess) != string::npos)
+    {
+        cout << "\nThat's right, " << guess << " is in the word!\n";
+        return true;
+    }
+    else
+    {
+        cout << "\nSorry, " << guess << " isn't in the word.\n";
+        return false;
+    }
+}
+
+string updateSoFar(char guess, string THE_WORD, string soFar)
+{
+    string result = "";
+
+    for(int i = 0; i < THE_WORD.size(); i++)
+    {
+        if(THE_WORD[i] == guess)
+        {
+            result += guess;
+        }
+        else result += soFar[i];
+    }
+
+    return result;
+}

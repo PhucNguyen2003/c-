@@ -1,0 +1,107 @@
+ex1:
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    //set up
+    vector<string> favouriteGame;
+    favouriteGame.push_back("game 1");
+    favouriteGame.push_back("game 2");
+    favouriteGame.push_back("game 3");
+    bool exitFavouriteGame = true;
+
+    cout << "\n\nWelcome to your favourite game list.\n";
+
+    while(exitFavouriteGame)
+    {
+        cout << "\nPlease choose a command:\n";
+        cout << "1 - List all the saved game\n";
+        cout << "2 - Add a new favourite game\n";
+        cout << "3 - Remove a saved game\n";
+        cout << "4 - Exist the list\n";
+        char myCommand;
+        cout << "Enter your command: ";
+        cin >> myCommand;
+
+        switch (myCommand)
+        {
+        case '1':{
+            cout << "\nYour favourite game are:\n";
+
+            //give out list
+            for(int i = 0; i < favouriteGame.size(); i++)
+            {
+                cout << favouriteGame[i] << endl;
+            }
+        }break;
+        case '2':{
+            cout << "\nEnter the game's name: ";
+
+            //get user input
+            string newGame;
+            cin >> newGame;
+            
+            //find the game
+            vector<string>::iterator iter;
+            iter = find(favouriteGame.begin(), favouriteGame.end(), newGame);
+            while(*iter == newGame)
+            {
+                cout << "\nYour game has already exist\n";
+                cout << "Enter the game's name: ";
+                cin >> newGame;
+            }
+            favouriteGame.push_back(newGame);
+            cout << "your game has been added.\n";
+        }break;
+        case '3':{
+            cout << "\nEnter the game's name: ";
+            string deleteGame;
+            cin >> deleteGame;
+            
+            vector<string>::iterator iter;
+            iter = find(favouriteGame.begin(), favouriteGame.end(), deleteGame);
+
+            while(*iter != deleteGame || iter == favouriteGame.end())
+            {
+                cout << "Your game was not found.";
+                cout << "\nEnter the game's name: ";
+                cin >> deleteGame;
+            }
+                favouriteGame.erase(iter);
+                cout << "Successfully deleted.\n";
+        } break;
+        case '4':
+            cout << "\nGoodbye!";
+            exitFavouriteGame = false;
+            break;
+        default:
+            cout << "\nInvalid command.\n";
+            break;
+        }
+    }
+
+    return 0;
+    
+}
+
+ex2:    
+    - the code block inside for loop increase the iterator, not the value it references
+
+ex3:
+    create a set of words and hints of the words
+    create a number of difficulties
+    choose a random word and hint
+    jumble the word 
+    create a interfere
+    get user first input
+    while user hasn't gotten the word or user hasn't quit
+        if user need hint
+            give the hint 
+        otherwise
+            tell the user he or she didn't success
+    if the word is right
+        congratulation the user
+    else 
+        say goodbye
+    

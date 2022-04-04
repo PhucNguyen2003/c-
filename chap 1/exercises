@@ -1,0 +1,35 @@
+ex1:
+    good names:
+
+    - randomNumber (tell the purpose)
+    - count (tell the work)
+    - i (simple and culture)
+
+    bad names:
+
+    - itCreateAPesudoNumberForYouThenToGuessAndWin (too long)
+    - 2lazy (number at the start)
+    - alf-jd@@@ (illegal symbol)
+
+ex2:
+    1. "2" because it is division of 2 integers, therefore the result is an integer
+    2. "2.33333" because it's a result of a float type number divide an integer type
+    3. same as 2
+
+ex3:
+    #include <iostream>
+    using namespace std;
+
+    int main(){
+        int G1, G2, G3;
+        
+        cout << "Enter the first game score: ";
+        cin >> G1;
+        cout << "Enter the second game score: ";
+        cin >> G2;
+        cout << "Enter the third game score: ";
+        cin >> G3;
+        cout << "Your average game score is: " << (G1 + G2 + G3)/3;
+        
+        return 0;
+    }

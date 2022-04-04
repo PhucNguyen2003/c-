@@ -1,0 +1,75 @@
+ex1:
+    #include <iostream>
+    using namespace std;
+
+    int main(){
+        cout << "Difficulty level\n\n";
+        cout << "1 - Easy\n";
+        cout << "2 - Normal\n";
+        cout << "3 - Hard\n";
+
+        enum gameDifficulty {EASY, NORMAL, HARD};
+        gameDifficulty myDifficulty;
+        cout << "Choice: "
+        cin >> myDifficulty;
+        
+        switch(myDifficulty){
+            case 0:
+                std::cout << "You picked Easy.\n";
+                break;
+            case 1:
+                std::cout << "You picked Normal.\n";
+                break;
+            case 2:
+                std::cout << "You picked Hard.\n";
+                break;
+            default:
+                std::cout << "You made an illegal choice.\n";
+        }
+
+        return 0;
+    }
+
+ex2:
+    since x before the while loop is initiated as 0 then the while loop won't run because the statement inside
+    the bracket is false.
+
+ex3:
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main(){
+    srand(static_cast<unsigned int>(time(0)));
+
+    cout << "\tWelcome to Guess Your number.\n\n";
+        
+    int myNumber;
+    cout << "Enter your number: ";
+    cin >> myNumber;
+
+    int pcNumber = (rand() % 100) + 1;
+    int lowNumber = 1;
+    int highNumber = 100;
+    do {
+        cout << "computer guess the number " << pcNumber << endl;
+
+        if(pcNumber < myNumber){
+            cout << "it was lower" << endl;
+            lowNumber = pcNumber;
+            pcNumber = (highNumber + pcNumber) / 2;
+        } 
+        else if(pcNumber > myNumber){
+            cout << "it was higher" << endl;
+            highNumber = pcNumber;
+            pcNumber = (lowNumber + pcNumber) / 2;
+        }
+        else {
+            cout << "it was right!";
+            break;
+        }
+    } while(true);
+
+    return 0;
+}
